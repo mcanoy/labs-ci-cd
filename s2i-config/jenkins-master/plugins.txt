@@ -13,6 +13,7 @@ display-url-api:2.1.0
 docker-commons:1.9
 docker-workflow:1.13
 durable-task:1.15
+email-ext:2.61
 favorite:2.3.1
 ghprb:1.39.0
 git-client:2.5.0
