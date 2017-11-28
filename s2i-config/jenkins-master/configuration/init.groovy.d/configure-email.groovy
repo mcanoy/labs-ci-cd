@@ -23,14 +23,15 @@ def password = System.getenv('SMTP_PASSWORD')
 def port = System.getenv('SMTP_PORT')
 def replyTo = System.getenv('SMTP_REPLY_TO')
 def charSet = System.getenv('SMTP_CHARSET')
-def sslString = (System.getenv('SMTP_USE_SSL'))
+def sslString = (System.getenv('SMTP_DISABLE_SSL'))
 def ssl = true;
 
 if(!charSet?.trim()) {
   charSet = "UTF-8"
 }
 
-if(!sslString?.trim() || sslString.toUpperCase() == 'FALSE') {
+if( sslString != null && sslString.toUpperCase() == 'TRUE') {
+  LOG.log(Level.INFO, 'Email SSL disabled')
   ssl = false;
   sslString = 'false'
 }
