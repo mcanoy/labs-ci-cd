@@ -1,0 +1,15 @@
+echo 'Hey Now!'
+
+token=`env |grep HUBOT_SLACK_TOKEN | cut -d '=' -f 2`
+if [ -z "$token" ]; then 
+  echo 'no slack token found'; 
+  token=`curl http://$FALLBACK_PROPERTIES/hubot |grep HUBOT_SLACK_TOKEN | cut -d '=' -f 2`
+  if [ ! -z "$token" ]; then
+   echo 'found external slack token'
+   export HUBOT_SLACK_TOKEN="$token"
+  fi
+else
+  echo 'slack token found';
+fi
+
+/usr/libexec/s2i/run
