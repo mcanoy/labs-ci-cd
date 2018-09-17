@@ -1,4 +1,4 @@
-FROM mcanoy-ci-cd/sonarqube-server:latest
+FROM docker-registry.default.svc:5000/mcanoy-ci-cd/sonarqube-server:latest
 
 USER root
 ADD sonar.properties /opt/sonarqube/conf/sonar.properties
