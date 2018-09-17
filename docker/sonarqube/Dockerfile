@@ -1,4 +1,4 @@
-FROM sonarqube-server:latest
+FROM mcanoy-ci-cd/sonarqube-server:latest
 
 USER root
 ADD sonar.properties /opt/sonarqube/conf/sonar.properties
