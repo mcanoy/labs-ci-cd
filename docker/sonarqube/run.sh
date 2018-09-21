@@ -3,6 +3,8 @@
 set -x
 set -e
 
+ls -l /opt/sonarqube/data/plugins
+
 ## If the mounted data volume is empty, populate it from the default data
 if ! [[ "$(ls -A /opt/sonarqube/data)" ]]; then
     cp -a /opt/sonarqube/data-init /opt/sonarqube/data
