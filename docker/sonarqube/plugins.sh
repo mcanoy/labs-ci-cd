@@ -13,12 +13,12 @@ for PLUGIN in "$@"
 do
   printf '\tExtracting plugin download location - %s\n' ${PLUGIN}
 
-  DOWNLOAD_URL = ""
   ## Build Breaker plugin is no longer listed in Update Center, have to add it by URL
   if [[ "${PLUGIN}" == "buildbreaker" ]]; then
 		 DOWNLOAD_URL=https://github.com/SonarQubeCommunity/sonar-build-breaker/releases/download/2.2/sonar-build-breaker-plugin-2.2.jar
 	else 
 		DOWNLOAD_URL=$(grep "^${PLUGIN}.downloadUrl" /tmp/pluginList.txt |awk -F '=' '{print $2}' | sed 's/\\//g')
+	fi
 
 	## Check to see if plugin exists, attempt to download the plugin if it does exist.
 	if ! [[ -z "${DOWNLOAD_URL}" ]]; then
