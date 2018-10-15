@@ -1,5 +1,8 @@
 ---
 
+- name: "Pausing For Nexus Bounce"
+  pause:
+    seconds: 20
 - name: "Ensure the Nexus Server is Up"
   uri:
     url: "http://{{ nexus_url }}/service/metrics/healthcheck"
