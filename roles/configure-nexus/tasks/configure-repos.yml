@@ -9,6 +9,9 @@
     force_basic_auth: yes
     status_code: 200,404
   register: get_script_result
+  retries: 20
+  delay: 30
+  until: get_script_result.status != 503
 
 - name: "Delete Script if it Exists"
   uri:
@@ -19,6 +22,10 @@
     force_basic_auth: yes
     status_code: 204
   when: get_script_result.status == 200
+  retries: 20
+  delay: 30
+  register: result
+  until: result.status != 503
 
 - name: "Create New Script"
   uri:
@@ -30,6 +37,10 @@
     body: "{{ lookup('file', item.script_file )}}"
     force_basic_auth: yes
     status_code: 204
+  retries: 20
+  delay: 30
+  register: result
+  until: result.status != 503
 
 - name: "Execute New Script"
   uri:
@@ -41,3 +52,7 @@
       Content-Type: "text/plain"
     force_basic_auth: yes
     status_code: 200
+  retries: 20
+  delay: 30
+  register: result
+  until: result.status != 503
