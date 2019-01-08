@@ -9,8 +9,8 @@
     force_basic_auth: yes
     status_code: 200,404
   register: get_script_result
-  retries: 20
-  delay: 30
+  retries: '{{ nexus_server_poll_retries }}'
+  delay: '{{ nexus_server_poll_delay_in_seconds }}'
   until: get_script_result.status != 503
 
 - name: "Delete Script if it Exists"
@@ -22,8 +22,8 @@
     force_basic_auth: yes
     status_code: 204
   when: get_script_result.status == 200
-  retries: 20
-  delay: 30
+  retries: '{{ nexus_server_poll_retries }}'
+  delay: '{{ nexus_server_poll_delay_in_seconds }}'
   register: result
   until: result.status != 503
 
@@ -37,8 +37,8 @@
     body: "{{ lookup('file', item.script_file )}}"
     force_basic_auth: yes
     status_code: 204
-  retries: 20
-  delay: 30
+  retries: '{{ nexus_server_poll_retries }}'
+  delay: '{{ nexus_server_poll_delay_in_seconds }}'
   register: result
   until: result.status != 503
 
@@ -52,7 +52,7 @@
       Content-Type: "text/plain"
     force_basic_auth: yes
     status_code: 200
-  retries: 20
-  delay: 30
+  retries: '{{ nexus_server_poll_retries }}'
+  delay: '{{ nexus_server_poll_delay_in_seconds }}'
   register: result
   until: result.status != 503
